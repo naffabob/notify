@@ -1,3 +1,5 @@
+import re
+
 from rest_framework import serializers
 
 from .models import Client, Mailing, Message, Tag
@@ -18,6 +20,11 @@ class ClientSerializer(serializers.ModelSerializer):
 
     def get_code(self, obj):
         return obj.phone[1:4]
+
+    def validate_phone(self, value):
+        if not re.match(r"^7\d{10}$", value):
+            raise serializers.ValidationError("Phone number should be in format 7XXXXXXXXXX")
+        return value
 
 
 class MailingSerializer(serializers.ModelSerializer):
