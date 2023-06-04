@@ -54,9 +54,9 @@ class MailingGeneralStatistics(MailingSerializer):
 
     def get_stats(self, obj):
         stats = {
-            "new_messages": Message.objects.filter(mailing=obj.pk, status=Message.NEW_STATUS).count(),
-            "failed_messages": Message.objects.filter(mailing=obj.pk, status=Message.FAILED_STATUS).count(),
-            "succeed_messages": Message.objects.filter(mailing=obj.pk, status=Message.SENT_STATUS).count()
+            "new_messages": Message.objects.filter(mailing=obj.pk, status=Message.STATUS_NEW).count(),
+            "failed_messages": Message.objects.filter(mailing=obj.pk, status=Message.STATUS_FAILED).count(),
+            "succeed_messages": Message.objects.filter(mailing=obj.pk, status=Message.STATUS_SENT).count()
         }
         return stats
 

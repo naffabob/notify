@@ -23,17 +23,7 @@ docker-compose stop
 
 
 ## API
-http://localhost:8000/ - api проекта
-
-http://localhost:8000/tags/ - теги
-
-http://localhost:8000/clients/ - клиенты
-
-http://localhost:8000/mailings/ - рассылки
-
-http://localhost:8000/mailings/stats/ - общая статистика по рассылкам
-
-http://localhost:8000/api/mailings/<pk>/stats/ - детальная статистика по рассылке
+http://localhost:8000/docs/ - документация API проекта.
 
 Токен и url API внешнего сервиса отправки можно задать в [.env](.env)
 
@@ -42,4 +32,4 @@ http://localhost:8000/api/mailings/<pk>/stats/ - детальная статис
 ## Выполненные дополнительные задания
 1. организовать тестирование написанного кода 
 2. подготовить docker-compose для запуска всех сервисов проекта одной командой 
-3. сделать так, чтобы по адресу /docs/ открывалась страница со Swagger UI и в нём отображалось описание разработанного API. Пример: https://petstore.swagger.io
+3. сделать так, чтобы по адресу /docs/ открывалась страница со Swagger UI и в нём отображалось описание разработанного API.

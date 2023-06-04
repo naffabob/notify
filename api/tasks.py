@@ -38,8 +38,7 @@ def create_messages():
 
 @app.task
 def handle_messages():
-    messages = Message.objects.filter(status=Message.NEW_STATUS)
-    messages_ids = messages.values_list('id', flat=True)
+    messages = Message.objects.filter(status=Message.STATUS_NEW)
 
     for message_id in messages_ids:
         send_message.delay(message_id)
@@ -50,11 +49,11 @@ def handle_messages():
 def send_message(pk: int):
     message = Message.objects.get(pk=pk)
 
-    if message.status in (Message.SENT_STATUS, Message.FAILED_STATUS):
+    if message.status in (Message.STATUS_SENT, Message.STATUS_FAILED):
         return
 
     if timezone.now() > message.mailing.end_at:
-        message.status = Message.FAILED_STATUS
+        message.status = Message.STATUS_FAILED
         message.save()
         return
 
@@ -79,6 +78,6 @@ def send_message(pk: int):
     if not response.ok:
         return
 
-    message.status = Message.SENT_STATUS
+    message.status = Message.STATUS_SENT
     message.sent_at = timezone.now()
     message.save()

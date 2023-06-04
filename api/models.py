@@ -26,14 +26,14 @@ class Mailing(models.Model):
 
 
 class Message(models.Model):
-    NEW_STATUS = 'new'
-    FAILED_STATUS = 'failed'
-    SENT_STATUS = 'sent'
+    STATUS_NEW = 'new'
+    STATUS_FAILED = 'failed'
+    STATUS_SENT = 'sent'
 
     STATUS_CHOICES = [
-        (NEW_STATUS, 'New'),
-        (FAILED_STATUS, 'Failed'),
-        (SENT_STATUS, 'Sent'),
+        (STATUS_NEW, 'New'),
+        (STATUS_FAILED, 'Failed'),
+        (STATUS_SENT, 'Sent'),
     ]
 
     created_at = models.DateTimeField()
