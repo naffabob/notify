@@ -88,20 +88,23 @@ class ClientAPITests(APITestCase):
 
 class MailingAPITestCase(APITestCase):
     def setUp(self):
+        day_ago = timezone.now() - timezone.timedelta(days=1)
+        day_after = timezone.now() + timezone.timedelta(days=1)
+
         self.tag1 = Tag.objects.create(name='tag1')
         self.tag2 = Tag.objects.create(name='tag2')
         self.mailing1 = Mailing.objects.create(
             operator_code='123',
-            start_at=timezone.now(),
-            end_at=timezone.now() + timedelta(days=1),
+            start_at=day_ago,
+            end_at=day_after,
             message_text='Test message 1'
         )
         self.mailing1.tags.add(self.tag1)
 
         self.mailing2_data = {
             'operator_code': '789',
-            'start_at': timezone.now(),
-            'end_at': timezone.now() + timedelta(days=1),
+            'start_at': day_ago,
+            'end_at': day_after,
             'message_text': 'Test message 2',
             'tags': [self.tag1.id, self.tag2.id]
         }

@@ -12,22 +12,25 @@ class CreateMessagesTaskTestCase(TestCase):
         self.client2 = Client.objects.create(phone='79911234567', timezone='UTC')
         self.client2.tags.add(self.tag1)
 
+        day_ago = timezone.now() - timezone.timedelta(days=1)
+        day_after = timezone.now() + timezone.timedelta(days=1)
+
         self.mailing_code = Mailing.objects.create(
-            start_at=timezone.now() - timezone.timedelta(days=1),
-            end_at=timezone.now() + timezone.timedelta(days=1),
+            start_at=day_ago,
+            end_at=day_after,
             message_text='Message for 990 code',
             operator_code='990',
         )
         self.mailing_tag = Mailing.objects.create(
-            start_at=timezone.now() - timezone.timedelta(days=1),
-            end_at=timezone.now() + timezone.timedelta(days=1),
+            start_at=day_ago,
+            end_at=day_after,
             message_text='Message for tag1 clients',
         )
         self.mailing_tag.tags.add(self.tag1)
 
         self.mailing_all = Mailing.objects.create(
-            start_at=timezone.now() - timezone.timedelta(days=1),
-            end_at=timezone.now() + timezone.timedelta(days=1),
+            start_at=day_ago,
+            end_at=day_after,
             message_text='Message for all clients',
         )
         self.mailing_future = Mailing.objects.create(

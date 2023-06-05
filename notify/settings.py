@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import os
 from pathlib import Path
 
@@ -119,5 +120,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+load_dotenv()
 PROBE_SERVER_TOKEN = os.environ.get('PROBE_SERVER_TOKEN')
 PROBE_SERVER_URL = os.environ.get('PROBE_SERVER_URL')
