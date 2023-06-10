@@ -12,7 +12,9 @@ build-job:
 test-job:
   stage: test
   script:
-    - docker-compose run app sh -c "python manage.py test"
+    - docker-compose up -d
+    - docker-compose exec app bash -c "python manage.py test"
+    - docker-compose down
 
 cleanup-job:
   stage: cleanup
