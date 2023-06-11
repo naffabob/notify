@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+  - cleanup
+
+build-job:
+  stage: build
+  script:
+    - docker-compose build
+
+test-job:
+  stage: test
+  script:
+    - docker-compose up -d
+    - docker-compose exec -T app bash -c "python manage.py test"
+    - docker-compose down
+
+cleanup-job:
+  stage: cleanup
+  script:
+    - docker rmi -f notify_app
+    - docker rmi -f notify_celery
